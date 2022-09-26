@@ -1,0 +1,19 @@
+{
+    "name": "niece1/laravel-kafka-queue",
+    "description": "Kafka queue package for Laravel",
+    "require": {
+        "laravel/framework": "^9.31"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Niece1\\LaravelKafkaQueue\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Volodymyr Zhonchuk",
+            "email": "vzhonchuk@gmail.com"
+        }
+    ]
+}
