@@ -5,15 +5,13 @@
         "laravel/framework": "^9.31"
     },
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Niece1\\LaravelKafkaQueue\\": "src/"
-        }
-    },
     "authors": [
         {
             "name": "Volodymyr Zhonchuk",
             "email": "vzhonchuk@gmail.com"
         }
-    ]
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.7"
+    }
 }
