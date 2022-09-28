@@ -6,10 +6,15 @@ use Illuminate\Queue\Connectors\ConnectorInterface;
 
 class KafkaConnector implements ConnectorInterface
 {
+    /**
+     * Connect Kafka to the application.
+     *
+     * @param  array $config
+     * @return KafkaQueue
+     */
     public function connect(array $config)
     {
         $conf = new \RdKafka\Conf();
-
         $conf->set('bootstrap.servers', $config['bootstrap_servers']);
         $conf->set('security.protocol', $config['security_protocol']);
         $conf->set('sasl.mechanisms', $config['sasl_mechanisms']);
@@ -17,7 +22,6 @@ class KafkaConnector implements ConnectorInterface
         $conf->set('sasl.password', $config['sasl_password']);
 
         $producer = new \RdKafka\Producer($conf);
-
         $conf->set('group.id', $config['group_id']);
         $conf->set('auto.offset.reset', 'earliest');
 

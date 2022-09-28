@@ -7,21 +7,48 @@ use Illuminate\Contracts\Queue\Queue as QueueContract;
 
 class KafkaQueue extends Queue implements QueueContract
 {
+    /**
+     * Kafka consumer.
+     */
     protected $consumer;
 
+    /**
+     * Kafka producer.
+     */
     protected $producer;
 
+    /**
+     * Create a new instance.
+     *
+     * @param  $producer
+     * @param  $consumer
+     * @return void
+     */
     public function __construct($producer, $consumer)
     {
         $this->producer = $producer;
         $this->consumer = $consumer;
     }
 
+    /**
+     * Kafka queue size.
+     *
+     * @param  $queue
+     * @return void
+     */
     public function size($queue = null)
     {
         //
     }
 
+    /**
+     * Push data to the queue.
+     *
+     * @param  $job
+     * @param  $data
+     * @param  $queue
+     * @return void
+     */
     public function push($job, $data = '', $queue = null)
     {
         $topic = $this->producer->newTopic($queue ?? env('KAFKA_QUEUE'));
@@ -29,16 +56,40 @@ class KafkaQueue extends Queue implements QueueContract
         $this->producer->flush(1000);
     }
 
+    /**
+     * Push data to the queue.
+     *
+     * @param  $payload
+     * @param  $queue
+     * @param  array $options
+     * @return void
+     */
     public function pushRaw($payload, $queue = null, array $options = [])
     {
         //
     }
 
+    /**
+     * Push data to the queue.
+     *
+     * @param  $delay
+     * @param  $job
+     * @param  $data
+     * @param  $queue
+     * @return void
+     */
     public function later($delay, $job, $data = '', $queue = null)
     {
         //
     }
 
+    /**
+     * Pop data to the queue.
+     *
+     * @param  $queue
+     * @throws \Exception
+     * @return void
+     */
     public function pop($queue = null)
     {
         $this->consumer->subscribe([$queue]);
